@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * @ClassName: StringHelper
  * @Description: String 处理类
- * @author <a href="MailTo:data55.126.com">杨磊</a>
+ * @author Minghao
  * @date 2014-5-29 上午9:25:43
  * @version 1.0-SNAPSHOT
  */

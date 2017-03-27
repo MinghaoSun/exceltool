@@ -15,7 +15,7 @@
     insert into ODS.ODSDMS_SALE_PHONE_CHNL_RATE (DT_MONTH, CHNL_TYP, KPI_TYP, 
       KPI_VAL_M, KPI_VAL_LYM, KPI_VAL_Y, 
       KPI_VAL_LY, LOAD_DT)
-  values
+  values 
   <foreach collection="list" item="item" index="index"
    separator=",">
    (#{item.dtMonth,jdbcType=DECIMAL}, #{item.chnlTyp,jdbcType=VARCHAR}, #{item.kpiTyp,jdbcType=VARCHAR}, 

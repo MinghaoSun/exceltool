@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @ClassName: IPUtil
  * @Description: IP 相关操作
- * @author <a href="MailTo:data55.126.com">杨磊</a>
+ * @author Minghao
  * @date 2014-12-15 下午4:22:34
  * @version 1.0-SNAPSHOT
  */

@@ -15,6 +15,7 @@ public class Constants {
 	public static final String ATTR_CLSS_4G="4G";
 	public static final String ATTR_CLSS_CT4G="CT4G";
 	public static final String ATTR_CLSS_CMCC4G="CMCC4G";
+	public static final String ATTR_CLSS_CU4G="CMCC4G";
 	public static final String ATTR_CLSS_DOUBLE4G="DOUBLE4G";
 	public static final String ATTR_CLSS_TRIPLE4G="TRIPLE4G";
 	
@@ -34,6 +35,10 @@ public class Constants {
 	public static final String ATTR_CLSS_CMCC4G_HXJJ="CMCC4G_HXJJ";
 	public static final String ATTR_CLSS_CMCC4G_HYCC="CMCC4G_HYCC";
 	public static final String ATTR_CLSS_CMCC4G_HXCC="CMCC4G_HXCC";
+	public static final String ATTR_CLSS_CU4G_HYJJ="CMCC4G_HYJJ";
+	public static final String ATTR_CLSS_CU4G_HXJJ="CMCC4G_HXJJ";
+	public static final String ATTR_CLSS_CU4G_HYCC="CMCC4G_HYCC";
+	public static final String ATTR_CLSS_CU4G_HXCC="CMCC4G_HXCC";
 	public static final String ATTR_CLSS_DOUBLE4G_HYJJ="DOUBLE4G_HYJJ";
 	public static final String ATTR_CLSS_DOUBLE4G_HXJJ="DOUBLE4G_HXJJ";
 	public static final String ATTR_CLSS_DOUBLE4G_HYCC="DOUBLE4G_HYCC";

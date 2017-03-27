@@ -16,7 +16,7 @@ import freemarker.template.Template;
 /**
  * @ClassName: FreemarkerHelper
  * @Description: TODO(基于Freemarker模板技术的模板服务)
- * @author <a href="MailTo:data55.126.com">杨磊</a>
+ * @author Minghao
  * @date 2015-10-14 上午9:35:07
  * @version 1.0-SNAPSHOT
  */

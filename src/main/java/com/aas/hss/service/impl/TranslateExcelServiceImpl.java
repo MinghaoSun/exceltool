@@ -13,6 +13,9 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.ss.usermodel.Cell;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.aas.hss.common.util.Constants;
 import com.aas.hss.common.util.ExcelColumnTools;
 import com.aas.hss.common.util.StringHelper;
@@ -124,14 +127,15 @@ public class TranslateExcelServiceImpl implements TranslateExcelService {
 
 	@Override
 	public List<OdsdmsSalePhoneBrank> analysisProvinceBrandQtyAtSheet3(HSSFSheet hSSFSheet, String date,
-			String attrClss) {
+			String attrClss,String bstart,String bend) {
 		// 先取出各品牌和其对应的cell号
 		List<OdsdmsSalePhoneBrank> list = new ArrayList<OdsdmsSalePhoneBrank>();
 		HSSFRow hSSFRow3 = hSSFSheet.getRow(3);
 		Map<Integer, String> brandMap = new HashMap<Integer, String>();
-		// AJ-IV
-		int brandstart = ExcelColumnTools.excelColStrToNum("AJ", 2);
-		int brandstop = ExcelColumnTools.excelColStrToNum("IV", 2);
+		/*int brandstart = ExcelColumnTools.excelColStrToNum("AJ", 2);
+		int brandstop = ExcelColumnTools.excelColStrToNum("IV", 2);*/
+		int brandstart = ExcelColumnTools.excelColStrToNum(bstart, 2);
+		int brandstop = ExcelColumnTools.excelColStrToNum(bend, 2);
 		for (int i = brandstart - 1; i <= brandstop - 1; i++) {
 			hSSFRow3.getCell(i).setCellType(Cell.CELL_TYPE_STRING);
 			String brand = hSSFRow3.getCell(i).getStringCellValue();
@@ -175,12 +179,12 @@ public class TranslateExcelServiceImpl implements TranslateExcelService {
 
 	@Override
 	public List<OdsdmsSalePhoneBrank> analysisProviceBrandAmtAtSheet4(HSSFSheet hSSFSheet, String date,
-			List<OdsdmsSalePhoneBrank> odsdmsSalePhoneOfflinelist) {
+			List<OdsdmsSalePhoneBrank> odsdmsSalePhoneOfflinelist,String bstart,String bend) {
 		HSSFRow hSSFRow3 = hSSFSheet.getRow(3);
 		Map<Integer, String> brandMap = new HashMap<Integer, String>();
 		// AJ-IV
-		int brandstart = ExcelColumnTools.excelColStrToNum("AJ", 2);
-		int brandstop = ExcelColumnTools.excelColStrToNum("IV", 2);
+		int brandstart = ExcelColumnTools.excelColStrToNum(bstart, 2);
+		int brandstop = ExcelColumnTools.excelColStrToNum(bend, 2);
 		for (int i = brandstart - 1; i <= brandstop - 1; i++) {
 			hSSFRow3.getCell(i).setCellType(Cell.CELL_TYPE_STRING);
 			String brand = hSSFRow3.getCell(i).getStringCellValue();
@@ -586,20 +590,38 @@ public class TranslateExcelServiceImpl implements TranslateExcelService {
 
 	@Override
 	public void saveOdsdmsSalePhoneChnlRate(List<OdsdmsSalePhoneChnlRate> odsdmsSalePhoneChnlRatelist) {
-		/*for(OdsdmsSalePhoneChnlRate odsdmsSalePhoneChnlRate:odsdmsSalePhoneChnlRatelist){
+		for(OdsdmsSalePhoneChnlRate odsdmsSalePhoneChnlRate:odsdmsSalePhoneChnlRatelist){
 			osdsdmsSalePhoneChnlRateMapper.insertSelective(odsdmsSalePhoneChnlRate);
-		}*/
-		osdsdmsSalePhoneChnlRateMapper.insertList(odsdmsSalePhoneChnlRatelist);
-		
+		}
 	}
 
 	@Override
+	@Transactional(propagation=Propagation.REQUIRED)
 	public boolean savePhoneExcelData(List<OdsdmsSalePhoneOnline> odsdmsSalePhoneOnlineList,
 			List<OdsdmsSalePhoneBrank> odsdmsSalePhoneBrankList, List<OdsdmsSalePhoneTotal> odsdmsSalePhoneTotalList,
 			List<OdsdmsSalePhoneMarktShare> odsdmsSalePhoneMarktShareList,
 			List<OdsdmsSalePhoneCityRate> odsdmsSalePhoneCityRateList,
 			List<OdsdmsSalePhoneChnlRate> odsdmsSalePhoneChnlRateList) {
-		return false;
+		//挨个list遍历保存
+		for(OdsdmsSalePhoneOnline odsdmsSalePhoneOnline:odsdmsSalePhoneOnlineList){
+			odsdmsSalePhoneOnlineMapper.insertSelective(odsdmsSalePhoneOnline);
+		}
+		for(OdsdmsSalePhoneTotal odsdmsSalePhoneTotal:odsdmsSalePhoneTotalList){
+			odsdmsSalePhoneTotalMapper.insertSelective(odsdmsSalePhoneTotal);
+		}
+		for(OdsdmsSalePhoneMarktShare odsdmsSalePhoneMarktShare:odsdmsSalePhoneMarktShareList){
+			odsdmsSalePhoneMarktShareMapper.insertSelective(odsdmsSalePhoneMarktShare);
+		}
+		for(OdsdmsSalePhoneBrank odsdmsSalePhoneBrank:odsdmsSalePhoneBrankList){
+			odsdmsSalePhoneBrankMapper.insertSelective(odsdmsSalePhoneBrank);
+		}
+		for(OdsdmsSalePhoneCityRate odsdmsSalePhoneCityRate:odsdmsSalePhoneCityRateList){
+			odsdmsSalePhoneCityRateMapper.insertSelective(odsdmsSalePhoneCityRate);
+		}
+		for(OdsdmsSalePhoneChnlRate odsdmsSalePhoneChnlRate:odsdmsSalePhoneChnlRateList){
+			osdsdmsSalePhoneChnlRateMapper.insertSelective(odsdmsSalePhoneChnlRate);
+		}
+		return true;
 	}
 
 }

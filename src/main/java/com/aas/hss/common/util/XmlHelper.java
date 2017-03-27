@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 /**
  * @ClassName: XmlHelper
  * @Description: Xml序列化和反序列化
- * @author <a href="MailTo:data55.126.com">杨磊</a>
+ * @author Minghao
  * @date 2014-4-28 上午8:17:53
  * @version 1.0-SNAPSHOT
  */

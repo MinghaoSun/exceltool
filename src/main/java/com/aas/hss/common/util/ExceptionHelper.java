@@ -6,8 +6,8 @@ import java.io.StringWriter;
 /** 
  * @ClassName: ExceptionHelper 
  * @Description: 异常基本业务处理 
- * @author <a href="MailTo:data55.126.com">杨磊</a> 
- * @date 2014-6-9 上午10:47:38 
+ * @author Minghao
+ * @date 2017年3月27日16:42:00 
  * @version 1.0-SNAPSHOT
  */
 public class ExceptionHelper {

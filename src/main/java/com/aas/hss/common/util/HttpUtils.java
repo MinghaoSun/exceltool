@@ -22,7 +22,7 @@ import org.apache.http.util.EntityUtils;
 /**
  * @ClassName: HttpUtils
  * @Description: Java http请求类封装，当然也可以引用apache的httpclient，但是封装的目的就是减少jar包的引用
- * @author <a href="MailTo:data55.126.com">杨磊</a>
+ * @author Minghao
  * @date 2014-3-5 上午9:59:52
  * @version 1.0-SNAPSHOT
  */

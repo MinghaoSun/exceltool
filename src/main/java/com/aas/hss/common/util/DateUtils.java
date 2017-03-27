@@ -9,8 +9,8 @@ import java.util.GregorianCalendar;
 /**
  * @ClassName: DateUtils
  * @Description: 封装一些常用操作，获取时间等
- * @author <a href="MailTo:data55.126.com">杨磊</a>
- * @date 2014-3-5 下午5:07:04
+ * @author Minghao
+ * @date 2017年3月27日16:42:17
  * @version 1.0-SNAPSHOT
  */
 public final class DateUtils {

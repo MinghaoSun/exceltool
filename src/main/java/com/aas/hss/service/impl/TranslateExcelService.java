@@ -24,11 +24,11 @@ public interface TranslateExcelService {
 	void saveOdsdmsSalePhoneOnline(List<OdsdmsSalePhoneOnline> odsdmsSalePhoneOnlinelist);
 
 	// 查询各省份各品牌线下销售数量
-	List<OdsdmsSalePhoneBrank> analysisProvinceBrandQtyAtSheet3(HSSFSheet sheetAt, String date, String attrClss);
+	List<OdsdmsSalePhoneBrank> analysisProvinceBrandQtyAtSheet3(HSSFSheet sheetAt, String date, String attrClss,String bstart,String bend);
 
 	// 查询各省份各品牌线下销售额
 	List<OdsdmsSalePhoneBrank> analysisProviceBrandAmtAtSheet4(HSSFSheet sheetAt, String date,
-			List<OdsdmsSalePhoneBrank> odsdmsSalePhoneOfflinelist);
+			List<OdsdmsSalePhoneBrank> odsdmsSalePhoneOfflinelist,String bstart,String bend);
 
 	// 保存数据到OdsdmsSalePhoneOffline
 	void saveOdsdmsSalePhoneBrank(List<OdsdmsSalePhoneBrank> odsdmsSalePhoneOfflinelist);

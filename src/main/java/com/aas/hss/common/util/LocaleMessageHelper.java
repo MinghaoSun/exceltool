@@ -12,7 +12,7 @@ import freemarker.ext.beans.ResourceBundleModel;
 /**
  * @ClassName: LocaleMessageHelper
  * @Description: TODO(国际化文件帮助类)
- * @author <a href="MailTo:data55.126.com">杨磊</a>
+ * @author Minghao
  * @date 2015-10-13 下午7:50:51
  * @version 1.0-SNAPSHOT
  */

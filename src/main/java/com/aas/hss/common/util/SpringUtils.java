@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContextAware;
 /**
  * @ClassName: SpringUtils
  * @Description: TODO(spring的工具类)
- * @author <a href="MailTo:data55.126.com">杨磊</a>
+ * @author Minghao
  * @date 2015-12-18 上午11:01:41
  * @version 1.0-SNAPSHOT
  */

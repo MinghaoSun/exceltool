@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aas.hss.mapper.OdsdmsSalePhoneOnlineMapper">
+  <resultMap id="BaseResultMap" type="com.aas.hss.entity.OdsdmsSalePhoneOnline">
+    <result column="DT_MONTH" jdbcType="DECIMAL" property="dtMonth" />
+    <result column="ONLINE_FLAG" jdbcType="DECIMAL" property="onlineFlag" />
+    <result column="BRAND_NAME" jdbcType="VARCHAR" property="brandName" />
+    <result column="SALE_QTY" jdbcType="DECIMAL" property="saleQty" />
+    <result column="SALE_AMT" jdbcType="DECIMAL" property="saleAmt" />
+    <result column="LOAD_DT" jdbcType="DATE" property="loadDt" />
+  </resultMap>
+  <insert id="insert" parameterType="com.aas.hss.entity.OdsdmsSalePhoneOnline">
+    insert into ODS.ODSDMS_SALE_PHONE_ONLINE (DT_MONTH, ONLINE_FLAG, BRAND_NAME, 
+      SALE_QTY, SALE_AMT, LOAD_DT
+      )
+    values (#{dtMonth,jdbcType=DECIMAL}, #{onlineFlag,jdbcType=DECIMAL}, #{brandName,jdbcType=VARCHAR}, 
+      #{saleQty,jdbcType=DECIMAL}, #{saleAmt,jdbcType=DECIMAL}, #{loadDt,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.aas.hss.entity.OdsdmsSalePhoneOnline">
+    insert into ODS.ODSDMS_SALE_PHONE_ONLINE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dtMonth != null">
+        DT_MONTH,
+      </if>
+      <if test="onlineFlag != null">
+        ONLINE_FLAG,
+      </if>
+      <if test="brandName != null">
+        BRAND_NAME,
+      </if>
+      <if test="saleQty != null">
+        SALE_QTY,
+      </if>
+      <if test="saleAmt != null">
+        SALE_AMT,
+      </if>
+      <if test="loadDt != null">
+        LOAD_DT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dtMonth != null">
+        #{dtMonth,jdbcType=DECIMAL},
+      </if>
+      <if test="onlineFlag != null">
+        #{onlineFlag,jdbcType=DECIMAL},
+      </if>
+      <if test="brandName != null">
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="saleQty != null">
+        #{saleQty,jdbcType=DECIMAL},
+      </if>
+      <if test="saleAmt != null">
+        #{saleAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="loadDt != null">
+        #{loadDt,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+</mapper>

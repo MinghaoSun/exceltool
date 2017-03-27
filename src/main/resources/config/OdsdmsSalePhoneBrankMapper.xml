@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aas.hss.mapper.OdsdmsSalePhoneBrankMapper">
+  <resultMap id="BaseResultMap" type="com.aas.hss.entity.OdsdmsSalePhoneBrank">
+    <result column="DT_MONTH" jdbcType="DECIMAL" property="dtMonth" />
+    <result column="PROVINCE" jdbcType="VARCHAR" property="province" />
+    <result column="ATTR_CLSS" jdbcType="VARCHAR" property="attrClss" />
+    <result column="BRANK_NAME" jdbcType="VARCHAR" property="brankName" />
+    <result column="SALE_QTY" jdbcType="DECIMAL" property="saleQty" />
+    <result column="SALE_AMT" jdbcType="DECIMAL" property="saleAmt" />
+    <result column="LOAD_DT" jdbcType="DATE" property="loadDt" />
+  </resultMap>
+  <insert id="insert" parameterType="com.aas.hss.entity.OdsdmsSalePhoneBrank">
+    insert into ODS.ODSDMS_SALE_PHONE_BRANK (DT_MONTH, PROVINCE, ATTR_CLSS, 
+      BRANK_NAME, SALE_QTY, SALE_AMT, 
+      LOAD_DT)
+    values (#{dtMonth,jdbcType=DECIMAL}, #{province,jdbcType=VARCHAR}, #{attrClss,jdbcType=VARCHAR}, 
+      #{brankName,jdbcType=VARCHAR}, #{saleQty,jdbcType=DECIMAL}, #{saleAmt,jdbcType=DECIMAL}, 
+      #{loadDt,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.aas.hss.entity.OdsdmsSalePhoneBrank">
+    insert into ODS.ODSDMS_SALE_PHONE_BRANK
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dtMonth != null">
+        DT_MONTH,
+      </if>
+      <if test="province != null">
+        PROVINCE,
+      </if>
+      <if test="attrClss != null">
+        ATTR_CLSS,
+      </if>
+      <if test="brankName != null">
+        BRANK_NAME,
+      </if>
+      <if test="saleQty != null">
+        SALE_QTY,
+      </if>
+      <if test="saleAmt != null">
+        SALE_AMT,
+      </if>
+      <if test="loadDt != null">
+        LOAD_DT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dtMonth != null">
+        #{dtMonth,jdbcType=DECIMAL},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="attrClss != null">
+        #{attrClss,jdbcType=VARCHAR},
+      </if>
+      <if test="brankName != null">
+        #{brankName,jdbcType=VARCHAR},
+      </if>
+      <if test="saleQty != null">
+        #{saleQty,jdbcType=DECIMAL},
+      </if>
+      <if test="saleAmt != null">
+        #{saleAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="loadDt != null">
+        #{loadDt,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+</mapper>

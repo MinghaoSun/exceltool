@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:task="http://www.springframework.org/schema/task" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/task   
+    http://www.springframework.org/schema/task/spring-task-3.0.xsd 
+     http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/tx 
+     http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop 
+     http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+     http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context-3.0.xsd ">
+
+	<!--启用切面 -->
+	<aop:aspectj-autoproxy />
+	<context:annotation-config />
+	<context:component-scan base-package="com.aas.hss">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	
+	<!-- 使用annotation注解方式配置事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- 使用JDBC事务 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- 引入配置文件 -->
+	<context:property-placeholder location="classpath:ini.properties" />
+
+	<!--创建jdbc数据源 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+		<property name="url" value="${oracle.url}" />
+		<property name="username" value="${oracle.username}" />
+		<property name="password" value="${oracle.password}" />
+		<!-- 初始化连接数量 -->
+		<property name="initialSize" value="${druid.initialSize}" />
+		<!-- 最大并发连接数 -->
+		<property name="maxActive" value="${druid.maxActive}" />
+		<!-- 最小空闲连接数 -->
+		<property name="minIdle" value="${druid.minIdle}" />
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="${druid.maxWait}" />
+		<!-- 超过时间限制是否回收 -->
+		<property name="removeAbandoned" value="${druid.removeAbandoned}" />
+		<!-- 超过时间限制多长； -->
+		<property name="removeAbandonedTimeout" value="${druid.removeAbandonedTimeout}" />
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="${druid.timeBetweenEvictionRunsMillis}" />
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="${druid.minEvictableIdleTimeMillis}" />
+		<!-- 用来检测连接是否有效的sql，要求是一个查询语句 -->
+		<property name="validationQuery" value="${druid.validationQuery}" />
+		<!-- 申请连接的时候检测 -->
+		<property name="testWhileIdle" value="${druid.testWhileIdle}" />
+		<!-- 申请连接时执行validationQuery检测连接是否有效，配置为true会降低性能 -->
+		<property name="testOnBorrow" value="${druid.testOnBorrow}" />
+		<!-- 归还连接时执行validationQuery检测连接是否有效，配置为true会降低性能 -->
+		<property name="testOnReturn" value="${druid.testOnReturn}" />
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+		<property name="poolPreparedStatements" value="${druid.poolPreparedStatements}" />
+		<property name="maxPoolPreparedStatementPerConnectionSize" value="${druid.maxPoolPreparedStatementPerConnectionSize}" />
+		<!--属性类型是字符串，通过别名的方式配置扩展插件，常用的插件有： 监控统计用的filter:stat 日志用的filter:log4j 防御SQL注入的filter:wall -->
+		<property name="filters" value="${druid.filters}" />
+	</bean>
+
+	<!-- 配置SqlSessionFactoryBean -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis.xml" />
+		<property name="mapperLocations">
+			<list>
+				<!-- 表示在包或以下所有目录中，以-mapper.xml结尾所有文件 -->
+				<value>classpath:config/*Mapper.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 配置mybatis dao注册，所有dao都继承sqlMapper annotationClass：当指定了annotationClass的时候，MapperScannerConfigurer将只注册使用了annotationClass注解标记的接口。 markerInterface：markerInterface是用于指定一个接口的，当指定了markerInterface之后，MapperScannerConfigurer将只注册继承自markerInterface的接口。 如果上述两个属性都指定了的话，那么MapperScannerConfigurer将取它们的并集，而不是交集。即使用了annotationClass进行标记或者继承自markerInterface 的接口都将被注册为一个MapperFactoryBean。 除了用于缩小注册Mapper接口范围的属性之外，我们还可以指定一些其他属性，如： 
+		sqlSessionFactory：这个属性已经废弃。当我们使用了多个数据源的时候我们就需要通过sqlSessionFactory来指定在注册MapperFactoryBean的时候需要使用的SqlSessionFactory， 因为在没有指定sqlSessionFactory的时候，会以Autowired的方式自动注入一个。换言之当我们只使用一个数据源的时候，即只定义了一个SqlSessionFactory的时候我们就可以不给 MapperScannerConfigurer指定SqlSessionFactory。 sqlSessionFactoryBeanName：它的功能跟sqlSessionFactory是一样的，只是它指定的是定义好的SqlSessionFactory对应的bean名称。 sqlSessionTemplate：这个属性已经废弃。它的功能也是相当于sqlSessionFactory的，因为就像前面说的那样，MapperFactoryBean最终还是使用的SqlSession的getMapper 
+		方法取的对应的Mapper对象。当定义有多个SqlSessionTemplate的时候才需要指定它。对于一个MapperFactoryBean来说SqlSessionFactory和SqlSessionTemplate只需要其中一个就可以了， 当两者都指定了的时候，SqlSessionFactory会被忽略。 sqlSessionTemplateBeanName：指定需要使用的sqlSessionTemplate对应的bean名称。 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.aas.hss.mapper" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
+
+	<bean id="druid-stat-interceptor" class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
+	</bean>
+	<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut" scope="prototype">
+		<property name="patterns">
+			<list>
+				<value>com.aas.hss.service..*</value>
+			</list>
+		</property>
+	</bean>
+	<aop:config>
+		<aop:advisor advice-ref="druid-stat-interceptor" pointcut-ref="druid-stat-pointcut" />
+	</aop:config>
+
+	<!-- spring auto -->
+	<bean id="springUtils" class="com.aas.hss.common.util.SpringUtils"></bean>
+	
+	<!-- jobs -->
+	<task:annotation-driven/> 
+	
+</beans>

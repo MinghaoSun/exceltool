@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aas.hss.mapper.OdsdmsSalePhoneMarktShareMapper">
+  <resultMap id="BaseResultMap" type="com.aas.hss.entity.OdsdmsSalePhoneMarktShare">
+    <result column="DT_MONTH" jdbcType="DECIMAL" property="dtMonth" />
+    <result column="BRANK_NAME" jdbcType="VARCHAR" property="brankName" />
+    <result column="MARKT_LEVEL" jdbcType="VARCHAR" property="marktLevel" />
+    <result column="TY_FLAG" jdbcType="DECIMAL" property="tyFlag" />
+    <result column="SALE_QTY_RATE" jdbcType="DECIMAL" property="saleQtyRate" />
+    <result column="SALE_AMT_RATE" jdbcType="DECIMAL" property="saleAmtRate" />
+    <result column="LOAD_DT" jdbcType="DATE" property="loadDt" />
+  </resultMap>
+  <insert id="insert" parameterType="com.aas.hss.entity.OdsdmsSalePhoneMarktShare">
+    insert into ODS.ODSDMS_SALE_PHONE_MARKT_SHARE (DT_MONTH, BRANK_NAME, MARKT_LEVEL, 
+      TY_FLAG, SALE_QTY_RATE, SALE_AMT_RATE, 
+      LOAD_DT)
+    values (#{dtMonth,jdbcType=DECIMAL}, #{brankName,jdbcType=VARCHAR}, #{marktLevel,jdbcType=VARCHAR}, 
+      #{tyFlag,jdbcType=DECIMAL}, #{saleQtyRate,jdbcType=DECIMAL}, #{saleAmtRate,jdbcType=DECIMAL}, 
+      #{loadDt,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.aas.hss.entity.OdsdmsSalePhoneMarktShare">
+    insert into ODS.ODSDMS_SALE_PHONE_MARKT_SHARE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dtMonth != null">
+        DT_MONTH,
+      </if>
+      <if test="brankName != null">
+        BRANK_NAME,
+      </if>
+      <if test="marktLevel != null">
+        MARKT_LEVEL,
+      </if>
+      <if test="tyFlag != null">
+        TY_FLAG,
+      </if>
+      <if test="saleQtyRate != null">
+        SALE_QTY_RATE,
+      </if>
+      <if test="saleAmtRate != null">
+        SALE_AMT_RATE,
+      </if>
+      <if test="loadDt != null">
+        LOAD_DT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dtMonth != null">
+        #{dtMonth,jdbcType=DECIMAL},
+      </if>
+      <if test="brankName != null">
+        #{brankName,jdbcType=VARCHAR},
+      </if>
+      <if test="marktLevel != null">
+        #{marktLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="tyFlag != null">
+        #{tyFlag,jdbcType=DECIMAL},
+      </if>
+      <if test="saleQtyRate != null">
+        #{saleQtyRate,jdbcType=DECIMAL},
+      </if>
+      <if test="saleAmtRate != null">
+        #{saleAmtRate,jdbcType=DECIMAL},
+      </if>
+      <if test="loadDt != null">
+        #{loadDt,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+</mapper>

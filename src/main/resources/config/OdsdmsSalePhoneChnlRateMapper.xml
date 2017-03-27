@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aas.hss.mapper.OdsdmsSalePhoneChnlRateMapper">
+  <resultMap id="BaseResultMap" type="com.aas.hss.entity.OdsdmsSalePhoneChnlRate">
+    <result column="DT_MONTH" jdbcType="DECIMAL" property="dtMonth" />
+    <result column="CHNL_TYP" jdbcType="VARCHAR" property="chnlTyp" />
+    <result column="KPI_TYP" jdbcType="VARCHAR" property="kpiTyp" />
+    <result column="KPI_VAL_M" jdbcType="DECIMAL" property="kpiValM" />
+    <result column="KPI_VAL_LYM" jdbcType="DECIMAL" property="kpiValLym" />
+    <result column="KPI_VAL_Y" jdbcType="DECIMAL" property="kpiValY" />
+    <result column="KPI_VAL_LY" jdbcType="DECIMAL" property="kpiValLy" />
+    <result column="LOAD_DT" jdbcType="DATE" property="loadDt" />
+  </resultMap>
+  <insert id="insertList" parameterType="java.util.List">
+    insert into ODS.ODSDMS_SALE_PHONE_CHNL_RATE (DT_MONTH, CHNL_TYP, KPI_TYP, 
+      KPI_VAL_M, KPI_VAL_LYM, KPI_VAL_Y, 
+      KPI_VAL_LY, LOAD_DT)
+  values
+  <foreach collection="list" item="item" index="index"
+   separator=",">
+   (#{item.dtMonth,jdbcType=DECIMAL}, #{item.chnlTyp,jdbcType=VARCHAR}, #{item.kpiTyp,jdbcType=VARCHAR}, 
+      #{item.kpiValM,jdbcType=DECIMAL}, #{item.kpiValLym,jdbcType=DECIMAL}, #{item.kpiValY,jdbcType=DECIMAL}, 
+      #{item.kpiValLy,jdbcType=DECIMAL}, #{item.loadDt,jdbcType=DATE})
+  </foreach>
+  </insert>
+  <insert id="insert" parameterType="com.aas.hss.entity.OdsdmsSalePhoneChnlRate">
+    insert into ODS.ODSDMS_SALE_PHONE_CHNL_RATE (DT_MONTH, CHNL_TYP, KPI_TYP, 
+      KPI_VAL_M, KPI_VAL_LYM, KPI_VAL_Y, 
+      KPI_VAL_LY, LOAD_DT)
+    values (#{dtMonth,jdbcType=DECIMAL}, #{chnlTyp,jdbcType=VARCHAR}, #{kpiTyp,jdbcType=VARCHAR}, 
+      #{kpiValM,jdbcType=DECIMAL}, #{kpiValLym,jdbcType=DECIMAL}, #{kpiValY,jdbcType=DECIMAL}, 
+      #{kpiValLy,jdbcType=DECIMAL}, #{loadDt,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.aas.hss.entity.OdsdmsSalePhoneChnlRate">
+    insert into ODS.ODSDMS_SALE_PHONE_CHNL_RATE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dtMonth != null">
+        DT_MONTH,
+      </if>
+      <if test="chnlTyp != null">
+        CHNL_TYP,
+      </if>
+      <if test="kpiTyp != null">
+        KPI_TYP,
+      </if>
+      <if test="kpiValM != null">
+        KPI_VAL_M,
+      </if>
+      <if test="kpiValLym != null">
+        KPI_VAL_LYM,
+      </if>
+      <if test="kpiValY != null">
+        KPI_VAL_Y,
+      </if>
+      <if test="kpiValLy != null">
+        KPI_VAL_LY,
+      </if>
+      <if test="loadDt != null">
+        LOAD_DT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dtMonth != null">
+        #{dtMonth,jdbcType=DECIMAL},
+      </if>
+      <if test="chnlTyp != null">
+        #{chnlTyp,jdbcType=VARCHAR},
+      </if>
+      <if test="kpiTyp != null">
+        #{kpiTyp,jdbcType=VARCHAR},
+      </if>
+      <if test="kpiValM != null">
+        #{kpiValM,jdbcType=DECIMAL},
+      </if>
+      <if test="kpiValLym != null">
+        #{kpiValLym,jdbcType=DECIMAL},
+      </if>
+      <if test="kpiValY != null">
+        #{kpiValY,jdbcType=DECIMAL},
+      </if>
+      <if test="kpiValLy != null">
+        #{kpiValLy,jdbcType=DECIMAL},
+      </if>
+      <if test="loadDt != null">
+        #{loadDt,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+</mapper>
